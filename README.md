@@ -3,6 +3,7 @@
 ## Integrantes
 - Allan Felipe da Silva - 2269333
 - Pedro Henrique dos Santos - 2368030
+- Gabriel Jesus
 
 ## Sprint 1 - Definição da Proposta
 
@@ -14,8 +15,26 @@ O Garage Burger tem várias TVs que passam clipes de música, futebol e NBA, mas
 
 **Resumo:**
 
-O estudo em questao foi feito em um restaurante italiano em Telavive, em Israel. Os pesquisadores acompanharam 282 mesas, de uma ou duas pessoas, sem que os clientes soubessem, e compararam três situações: música lenta, música rápida e a playlist normal da casa. Com música lenta, o pessoal ficou em média 80 minutos no restaurante, enquanto com música rápida ficou só 57, ou seja, quase 40% a mais de tempo. Com música rápida, as gorjetas foram um pouco maiores do que com a playlist normal, e o valor da conta não mudou em nenhum dos casos.
+O estudo em questão foi feito em um restaurante italiano em Tel Aviv, em Israel. Os pesquisadores acompanharam 282 mesas, de uma ou duas pessoas, sem que os clientes soubessem, e compararam três situações: música lenta, música rápida e a playlist normal da casa. Com música lenta, o pessoal ficou em média 80 minutos no restaurante, enquanto com música rápida ficou só 57, ou seja, quase 40% a mais de tempo. Com música rápida, as gorjetas foram um pouco maiores do que com a playlist normal, e o valor da conta não mudou em nenhum dos casos.
 
 O que a gente tira disso é que o que está tocando no ambiente muda o comportamento do cliente, mesmo quando ele nem está prestando atenção. No Garage Burger acontece algo parecido: as TVs passam clipes, futebol e NBA sem nenhum critério, e a caixinha de sugestões mostra que muita gente não curte o que está passando, principalmente certos estilos de música e esportes que quase ninguém acompanha aqui, como NFL e a liga americana de beisebol.
 
 Se o conteúdo interfere no tempo que o cliente fica e na experiência dele, escolher a programação no “achismo” pode fazer o restaurante perder cliente. Por isso a ideia do nosso sistema é pegar as respostas do formulário que os clientes preenchem pelo QR code e mostrar o que agrada e o que não agrada em cada dia e horário, para o gerente montar a programação das TVs com base no que o público realmente quer.
+
+## Sprint 2 - Histórias de usuário e testes
+
+As cinco histórias, os critérios de aceitação e a ligação de cada critério com o seu teste estão em [`Documentos/Sprint_2.md`](Documentos/Sprint_2.md).
+
+| Arquivo | O que tem |
+| --- | --- |
+| `garage.py` | Estruturas de dados e as cinco funções do sistema |
+| `testesGarage.py` | 20 testes, um para cada critério de aceitação |
+| `Documentos/Sprint_2.md` | Histórias, critérios e tabela critério x teste |
+
+Para rodar os testes (Python 3.10 ou mais novo, sem instalar nada):
+
+```bash
+python -m unittest -v testesGarage
+```
+
+Nesta sprint os testes ainda falham, porque as funções só serão implementadas na Sprint 3.
