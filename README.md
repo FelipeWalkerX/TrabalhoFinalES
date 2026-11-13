@@ -41,9 +41,6 @@ Nesta sprint os testes ainda falham, porque as funções só serão implementada
 
 # Sprint 3 - Arquitetura e desenvolvimento
 
-**Projeto:** Analisador da programação das TVs do Garage Burger
-**Integrantes:** Allan Felipe da Silva, Pedro Henrique dos Santos e Gabriel Jesus
-
 Nesta sprint a gente implementou as cinco histórias da Sprint 2 no `garage.py`. Os 20 testes do `testesGarage.py` passam sem nenhuma alteração nos testes, e o sistema pode ser usado pelo terminal.
 
 ## 1. Diagrama da arquitetura
