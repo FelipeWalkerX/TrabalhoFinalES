@@ -79,12 +79,10 @@ class Recomendacao:
 
 
 def importar_avaliacoes(caminho: str | Path) -> ResultadoImportacao:
-    """HU01: lê o CSV (UTF-8, separado por ';'), valida e normaliza cada resposta.
+    """HU01: lê o CSV, valida e normaliza cada resposta
 
-    Se faltar coluna no cabeçalho, dá ValueError. Uma linha com problema vira
-    um erro na lista e a importação continua. Se o ID repetir, fica a primeira
-    ocorrência válida e a seguinte é rejeitada.
-    """
+    Se faltar coluna no cabeçalho, dá ValueError. Uma linha com problema vira um erro na lista e a importação continua 
+    Se o ID repetir, fica a primeira ocorrência válida e a seguinte é rejeitada"""
     caminho = Path(caminho)
     avaliacoes = []
     erros = []
@@ -119,11 +117,9 @@ def importar_avaliacoes(caminho: str | Path) -> ResultadoImportacao:
 
 
 def _validar_linha(valores):
-    """Monta uma Avaliacao a partir de uma linha do CSV.
+    """Monta uma Avaliacao a partir de uma linha do CSV
 
-    Devolve (avaliacao, None) se a linha estiver certa, ou (None, motivo)
-    com o nome do campo que deu problema.
-    """
+    Devolve (avaliacao, None) se a linha estiver certa, ou (None, motivo) com o nome do campo que deu problema"""
     if not valores["id_resposta"]:
         return None, "id_resposta vazio"
 
@@ -163,7 +159,7 @@ def _validar_linha(valores):
 
 
 def _eh_inteiro(valor):
-    # bool também é int em Python, então precisa ser excluído
+    # Ve se o valor é realmente um int e nao um nool, ja que bool também é int em Python, então precisa ser excluído
     return isinstance(valor, int) and not isinstance(valor, bool)
 
 
@@ -177,12 +173,12 @@ def filtrar_avaliacoes(
     hora_fim: int = 24,
     tv_id: str | None = None,
 ) -> list[Avaliacao]:
-    """HU02: aplica os filtros juntos e mantém a ordem das respostas.
+    """HU02: aplica os filtros juntos e mantém a ordem das respostas
 
-    O início entra e o fim não (inicio <= data_hora < fim), e o mesmo vale
-    para as horas. Dia da semana: segunda = 0 até domingo = 6. Filtro com
-    None é ignorado. Faixa que passa da meia-noite não funciona nesta versão.
-    """
+    O início entra e o fim não (inicio <= data_hora < fim), e o mesmo vale para as horas 
+    Dia da semana: segunda = 0 até domingo = 6. Filtro com None é ignorado 
+    Faixa que passa da meia-noite não funciona nesta versão"""
+
     # Valida os parâmetros antes de tudo, mesmo se a lista estiver vazia
     if inicio is not None and fim is not None and inicio >= fim:
         raise ValueError("O início do período precisa ser antes do fim")
@@ -211,12 +207,10 @@ def filtrar_avaliacoes(
 
 
 def calcular_indicadores(avaliacoes: list[Avaliacao]) -> Indicadores:
-    """HU03: agrupa as avaliações por conteúdo e conta as preferências separado.
+    """HU03: agrupa as avaliações por conteúdo e conta as preferências separado
 
-    Aceitação = 100 * (notas 4 ou 5) / avaliações do conteúdo.
-    A preferência não muda a nota do conteúdo que estava passando.
-    """
-    notas_por_conteudo = {}   # conteudo -> lista de notas, na ordem em que aparecem
+    Aceitação = 100 * (notas 4 ou 5) / avaliações do conteúdo. A preferência não muda a nota do conteúdo que estava passando"""
+    notas_por_conteudo = {}   #Conteudo -> lista de notas, na ordem em que aparecem
     preferencias = {}
 
     for avaliacao in avaliacoes:
@@ -238,15 +232,11 @@ def calcular_indicadores(avaliacoes: list[Avaliacao]) -> Indicadores:
     return Indicadores(len(avaliacoes), resumos, preferencias)
 
 
-def gerar_recomendacao(
-    indicadores: Indicadores, *, min_avaliacoes: int = 5
-) -> Recomendacao:
-    """HU04: recomenda só conteúdos que atingiram o mínimo de avaliações.
+def gerar_recomendacao(indicadores: Indicadores, *, min_avaliacoes: int = 5) -> Recomendacao:
+    """HU04: recomenda só conteúdos que atingiram o mínimo de avaliações
 
-    Ordem: maior aceitação, depois mais preferências, depois nome em ordem
-    alfabética. Se ninguém atingir o mínimo, o status é 'dados_insuficientes',
-    sem conteúdo e com ranking vazio.
-    """
+    Ordem: maior aceitação, depois mais preferências, depois nome em ordem alfabética 
+    Se ninguém atingir o mínimo, o status é 'dados_insuficientes', sem conteúdo e com ranking vazio"""
     if not _eh_inteiro(min_avaliacoes) or min_avaliacoes <= 0:
         raise ValueError("min_avaliacoes precisa ser um inteiro positivo")
 
@@ -270,12 +260,10 @@ def exportar_relatorio(
     caminho_json: str | Path,
     caminho_csv: str | Path,
 ) -> None:
-    """HU05: salva os indicadores em JSON e o ranking em CSV.
+    """HU05: salvando os indicadores em JSON e o ranking em CSV
 
-    Os dois arquivos ficam em UTF-8, e o CSV usa ';' com as colunas de
-    CAMPOS_RANKING_CSV. Se algum dos destinos já existir, dá FileExistsError
-    antes de escrever qualquer coisa.
-    """
+    Os dois arquivos ficam em UTF-8, e o CSV usa ';' com as colunas de CAMPOS_RANKING_CSV 
+    Se algum dos destinos já existir, dá FileExistsError antes de escrever qualquer coisa"""
     caminho_json = Path(caminho_json)
     caminho_csv = Path(caminho_csv)
 
